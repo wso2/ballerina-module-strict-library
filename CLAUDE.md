@@ -37,14 +37,14 @@ All classes under `io.wso2.strict.library`:
 
 **Validation flow (`StrictLibraryProjectValidator.perform`):**
 1. Guard with `AtomicBoolean` so the scan only runs once per compilation.
-2. Get the default module and scan all documents for the `wso2/strict.library` import.
+2. Iterate **all modules** in the package and scan their documents for the `wso2/strict.library` import.
 3. If the import is not found anywhere, return early (plugin inactive).
-4. If found, scan all documents for entrypoints and collect their descriptions.
+4. If found, scan **all modules** for entrypoints and collect their descriptions.
 5. If any entrypoints are found, report a single `STRICT_LIBRARY_101` diagnostic at the import's location, listing all violations.
 
 ### compiler-plugin-tests/ — Integration Tests
 
-- Single test class: `CompilerPluginTest.java` with 8 scenario-based tests
+- Single test class: `CompilerPluginTest.java` with 10 scenario-based tests
 - Each test scenario is a complete Ballerina project under `src/test/resources/ballerina_sources/`
 - Tests compile real Ballerina projects using the Ballerina distribution and assert on diagnostic output
 
@@ -58,6 +58,8 @@ All classes under `io.wso2.strict.library`:
 | `testProjectWithMultipleEntrypoints` | Has both `main` and a service — expects 1 error listing both |
 | `testProjectWithoutLibBal` | Import is in `other.bal` (no `lib.bal`) — plugin still activates, expects 1 error |
 | `testProjectImportNotInLib` | Import is in `other.bal`, lib.bal has no import — plugin still activates, expects 1 error |
+| `testProjectImportInSubmodule` | Import is in a sub-module file, `function init` in that sub-module — plugin activates and detects cross-module entrypoint |
+| `testProjectServiceInSubmodule` | Import is in the default module, service declaration is in a sub-module — plugin detects entrypoint across module boundary |
 
 ### ballerina/ — Marker Package
 
@@ -100,7 +102,7 @@ All versions centralized in `gradle.properties`. Key property: `ballerinaLangVer
 ## Key Conventions
 
 - Diagnostic codes follow the pattern `STRICT_LIBRARY_NNN` (currently only `STRICT_LIBRARY_101`)
-- Plugin activation is conditional: validates only when `wso2/strict.library` is imported in **any** `.bal` file of the default module (not restricted to `lib.bal`)
+- Plugin activation is conditional: validates only when `wso2/strict.library` is imported in **any** `.bal` file across **any module** of the package (default or sub-modules)
 - Validator uses `AtomicBoolean` to ensure a single full-module scan across multiple syntax kind triggers
 - The single diagnostic is reported at the location of the `wso2/strict.library` import declaration
 - Tests are integration-level: they load and compile full Ballerina projects, not unit tests of individual methods

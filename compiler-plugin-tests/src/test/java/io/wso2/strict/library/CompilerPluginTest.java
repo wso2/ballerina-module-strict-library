@@ -162,4 +162,30 @@ public class CompilerPluginTest {
         Assert.assertEquals(libraryErrors.length, 1);
         Assert.assertTrue(libraryErrors[0].message().contains("public function main"));
     }
+
+    @Test
+    public void testProjectImportInSubmodule() {
+        Package currentPackage = loadPackage("project_import_in_submodule");
+        PackageCompilation compilation = currentPackage.getCompilation();
+        DiagnosticResult diagnosticResult = compilation.diagnosticResult();
+        Diagnostic[] libraryErrors = diagnosticResult.diagnostics().stream()
+                .filter(d -> d.diagnosticInfo().severity().equals(DiagnosticSeverity.ERROR))
+                .filter(d -> STRICT_LIBRARY_101.equals(d.diagnosticInfo().code()))
+                .toArray(Diagnostic[]::new);
+        Assert.assertEquals(libraryErrors.length, 1);
+        Assert.assertTrue(libraryErrors[0].message().contains("function init"));
+    }
+
+    @Test
+    public void testProjectServiceInSubmodule() {
+        Package currentPackage = loadPackage("project_service_in_submodule");
+        PackageCompilation compilation = currentPackage.getCompilation();
+        DiagnosticResult diagnosticResult = compilation.diagnosticResult();
+        Diagnostic[] libraryErrors = diagnosticResult.diagnostics().stream()
+                .filter(d -> d.diagnosticInfo().severity().equals(DiagnosticSeverity.ERROR))
+                .filter(d -> STRICT_LIBRARY_101.equals(d.diagnosticInfo().code()))
+                .toArray(Diagnostic[]::new);
+        Assert.assertEquals(libraryErrors.length, 1);
+        Assert.assertTrue(libraryErrors[0].message().contains("service declaration"));
+    }
 }

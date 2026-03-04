@@ -57,21 +57,28 @@ public class StrictLibraryProjectValidator implements AnalysisTask<SyntaxNodeAna
             return;
         }
 
-        Module module = context.currentPackage().getDefaultModule();
-        Location importLocation = findStrictLibraryImport(module);
+        Location importLocation = null;
+        for (Module module : context.currentPackage().modules()) {
+            importLocation = findStrictLibraryImport(module);
+            if (importLocation != null) {
+                break;
+            }
+        }
         if (importLocation == null) {
             return;
         }
 
         List<String> entrypoints = new ArrayList<>();
-        for (DocumentId docId : module.documentIds()) {
-            Document doc = module.document(docId);
-            ModulePartNode root = doc.syntaxTree().rootNode();
-            String fileName = doc.name();
-            for (Node member : root.members()) {
-                String entrypoint = getEntrypointDescription(member);
-                if (entrypoint != null) {
-                    entrypoints.add(entrypoint + " in " + fileName);
+        for (Module module : context.currentPackage().modules()) {
+            for (DocumentId docId : module.documentIds()) {
+                Document doc = module.document(docId);
+                ModulePartNode root = doc.syntaxTree().rootNode();
+                String fileName = doc.name();
+                for (Node member : root.members()) {
+                    String entrypoint = getEntrypointDescription(member);
+                    if (entrypoint != null) {
+                        entrypoints.add(entrypoint + " in " + fileName);
+                    }
                 }
             }
         }
