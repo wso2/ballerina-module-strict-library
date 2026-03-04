@@ -49,7 +49,7 @@ jobs:
           cache-dir: "/tmp/trivy-cache"
 
       - name: Get Release Version
-        run: echo "VERSION=$(grep -w 'version' gradle.properties | cut -d= -f2 | rev | cut --complement -d- -f1 | rev)" >> $GITHUB_ENV
+        run: echo "VERSION=$(grep -w 'version' gradle.properties | cut -d= -f2 | sed -E 's/-(SNAPSHOT|[0-9]{8}-[0-9]{6}-[a-z0-9]+)$//')" >> $GITHUB_ENV
 
       - name: Pre-Release Dependency Version Update
         env:

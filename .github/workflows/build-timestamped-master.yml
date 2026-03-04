@@ -28,7 +28,7 @@ jobs:
         run: |
           startTime=$(TZ="Asia/Kolkata" date +'%Y%m%d-%H%M00')
           latestCommit=$(git log -n 1 --pretty=format:"%h")
-          VERSION=$(grep -w 'version' gradle.properties | cut -d= -f2 | rev | cut --complement -d- -f1 | rev)
+          VERSION=$(grep -w 'version' gradle.properties | cut -d= -f2 | sed -E 's/-(SNAPSHOT|[0-9]{8}-[0-9]{6}-[a-z0-9]+)$//')
           updatedVersion=$VERSION-$startTime-$latestCommit
           echo $updatedVersion
           sed -i "s/version=\(.*\)/version=$updatedVersion/g" gradle.properties
