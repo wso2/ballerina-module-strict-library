@@ -1,2 +1,3 @@
 # Ensure all text files use LF line endings (required by Checkstyle)
 * text=auto eol=lf
+*.bat text eol=crlf

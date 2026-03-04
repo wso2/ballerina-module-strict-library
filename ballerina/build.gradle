@@ -112,6 +112,11 @@ clean {
 }
 
 task copyCompilerPlugin(type: Copy) {
+    doFirst {
+        delete fileTree("$project.projectDir/compiler-plugin/libs").matching {
+            include "strict-library-compiler-plugin-*.jar"
+        }
+    }
     from "${project(':strict-library-compiler-plugin').buildDir}/libs"
     include "strict-library-compiler-plugin-*.jar"
     into "$project.projectDir/compiler-plugin/libs"
