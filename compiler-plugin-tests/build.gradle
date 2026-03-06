@@ -67,7 +67,7 @@ compileJava {
 
 def ballerinaHome = "${buildDir}/target/extracted-distributions/jballerina-tools-zip/" +
         "jballerina-tools-${ballerinaLangVersion}/jballerina-tools-${ballerinaLangVersion}"
-def balaDir = "${ballerinaHome}/repo/bala/wso2/strict.library/0.1.0/any"
+def balaDir = "${ballerinaHome}/repo/bala/wso2/strict.library/0.9.0/any"
 def pluginJarName = "strict-library-compiler-plugin-${project.version}.jar"
 
 task unpackJBallerinaTools(type: Copy) {
@@ -108,7 +108,7 @@ task createBalaStructure() {
         file("${balaDir}/package.json").text = """{
   "organization": "wso2",
   "name": "strict.library",
-  "version": "0.1.0",
+  "version": "0.9.0",
   "export": ["strict.library"],
   "ballerina_version": "${ballerinaLangVersion}",
   "implementation_vendor": "WSO2",
@@ -131,7 +131,7 @@ task createBalaStructure() {
     {
       "org": "wso2",
       "name": "strict.library",
-      "version": "0.1.0",
+      "version": "0.9.0",
       "transitive": false,
       "dependencies": [],
       "modules": []
@@ -141,7 +141,7 @@ task createBalaStructure() {
     {
       "org": "wso2",
       "package_name": "strict.library",
-      "version": "0.1.0",
+      "version": "0.9.0",
       "module_name": "strict.library",
       "dependencies": []
     }
