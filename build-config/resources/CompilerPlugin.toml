@@ -1,0 +1,6 @@
+[plugin]
+id = "strict-library-compiler-plugin"
+class = "io.wso2.strict.library.StrictLibraryCompilerPlugin"
+
+[[dependency]]
+path = "compiler-plugin/libs/strict-library-compiler-plugin-@project.version@.jar"

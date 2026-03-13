@@ -1,0 +1,9 @@
+[package]
+org = "wso2"
+name = "strict.library"
+version = "@toml.version@"
+authors = ["Ballerina"]
+keywords = ["library", "validation"]
+repository = "https://github.com/wso2/ballerina-module-strict-library"
+license = ["Apache-2.0"]
+distribution = "2201.13.0"

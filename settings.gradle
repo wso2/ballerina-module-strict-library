@@ -1,0 +1,11 @@
+rootProject.name = 'strict-library'
+
+include ':checkstyle'
+include ':strict-library-compiler-plugin'
+include ':strict-library-compiler-plugin-tests'
+include ':strict-library-ballerina'
+
+project(':checkstyle').projectDir = file("build-config${File.separator}checkstyle")
+project(':strict-library-compiler-plugin').projectDir = file('compiler-plugin')
+project(':strict-library-compiler-plugin-tests').projectDir = file('compiler-plugin-tests')
+project(':strict-library-ballerina').projectDir = file('ballerina')

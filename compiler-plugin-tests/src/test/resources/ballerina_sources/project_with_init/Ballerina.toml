@@ -1,0 +1,4 @@
+[package]
+org = "library_test"
+name = "project_with_init"
+version = "0.9.0"

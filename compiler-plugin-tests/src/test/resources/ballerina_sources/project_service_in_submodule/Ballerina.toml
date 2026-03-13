@@ -1,0 +1,4 @@
+[package]
+org = "library_test"
+name = "project_service_in_submodule"
+version = "0.9.0"

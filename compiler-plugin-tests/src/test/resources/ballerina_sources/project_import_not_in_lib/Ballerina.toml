@@ -1,0 +1,4 @@
+[package]
+org = "library_test"
+name = "project_import_not_in_lib"
+version = "0.9.0"

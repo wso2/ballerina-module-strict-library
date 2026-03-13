@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="BallerinaStrictLibraryCompilerPluginTests">
+    <test name="UnitTests">
+        <classes>
+            <class name="io.wso2.strict.library.CompilerPluginTest"/>
+        </classes>
+    </test>
+</suite>

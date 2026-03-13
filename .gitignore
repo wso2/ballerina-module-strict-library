@@ -12,6 +12,7 @@
 
 # Package Files #
 *.jar
+!gradle/wrapper/gradle-wrapper.jar
 *.war
 *.nar
 *.ear
@@ -22,3 +23,30 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+
+# Java related ignores
+build/
+target/
+.gradle/
+
+# MacOS
+*.DS_Store
+
+# IDE-related files
+.idea
+*.iml
+*.ipr
+*.iws
+.code
+.project
+.settings
+.vscode
+
+# Dependencies.toml of compiler-plugin-tests
+compiler-plugin-tests/**/Dependencies.toml
+
+# Ballerina related ignores
+Ballerina.lock
+velocity.log*
+
+compiler-plugin-tests/**/target
