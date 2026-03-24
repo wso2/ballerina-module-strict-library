@@ -26,8 +26,8 @@ jobs:
 
       - name: Build the Package
         env:
-          packageUser: ${{ secrets.BALLERINA_BOT_USERNAME }}
-          packagePAT: ${{ secrets.BALLERINA_BOT_TOKEN }}
+          packageUser: ${{ github.actor }}
+          packagePAT: ${{ secrets.GITHUB_TOKEN }}
         run: |
           ./gradlew build -x test
           ./gradlew test
@@ -59,8 +59,8 @@ jobs:
 
       - name: Build the Project
         env:
-          packageUser: ${{ secrets.BALLERINA_BOT_USERNAME }}
-          packagePAT: ${{ secrets.BALLERINA_BOT_TOKEN }}
+          packageUser: ${{ github.actor }}
+          packagePAT: ${{ secrets.GITHUB_TOKEN }}
           JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF8
         run: |
           ./gradlew.bat build -x test
